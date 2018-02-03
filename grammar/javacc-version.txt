@@ -1,0 +1,5 @@
+Picked up _JAVA_OPTIONS:   -Dawt.useSystemAAFontSettings=gasp
+Java Compiler Compiler Version 5.0 (Parser Generator)
+(type "javacc" with no arguments for help)
+Last argument "--version" is not a filename.
+

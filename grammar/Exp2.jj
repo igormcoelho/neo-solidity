@@ -1,0 +1,35 @@
+PARSER_BEGIN(Evaluator)
+
+public class Evaluator {
+    public static void main(String[] args) throws Exception {
+        int result = new Evaluator(new java.io.StringReader(args[0])).S();
+        System.out.println(result);
+    }
+}
+
+PARSER_END(Evaluator)
+
+SKIP:  { " " | "\t" | "\n" | "\r"                    }
+TOKEN: { "(" | ")" | "+" | "*" | <NUM: (["0"-"9"])+> }
+
+int S(): {int sum;}
+{
+  sum=E() <EOF> {return sum;}
+}
+
+int E(): {int sum, x;}
+{
+  sum=T() ("+" x=T() {sum += x;} )* {return sum;}
+}
+
+int T(): {int sum, x;}
+{
+  sum=F() ("*" x=F() {sum *= x;} )* {return sum;}
+}
+
+int F(): {int x; Token n;}
+{
+  n=<NUM> {return Integer.parseInt(n.image);}
+|
+  "(" x=E() ")" {return x;}
+}

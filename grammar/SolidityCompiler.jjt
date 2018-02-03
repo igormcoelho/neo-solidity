@@ -1,0 +1,118 @@
+options {
+ MULTI=true;
+ VISITOR=true;
+ NODE_DEFAULT_VOID=true;
+ //NODE_EXTENDS="BaseNode";
+}
+
+PARSER_BEGIN(Solidity)
+
+import java.util.*;
+
+public class Solidity {
+
+    private static Solidity parser ;
+
+    public static void main(String[] args) {
+
+    if(args.length == 0){
+      System.out.println("Solidity Parser:  Reading from standard input . . .");
+      parser = new Solidity(System.in);
+    } else if (args.length == 1) {
+      System.out.println("Solidity Parser:  Reading from file " + args[0] + " . . ." );
+      try {
+        parser = new Solidity(new java.io.FileInputStream(args[0]));
+      }
+      catch(java.io.FileNotFoundException e){
+        System.out.println("Solidity Parser:  File " + args[0] + " not found.");
+        return ;
+      }
+    } else {
+      System.out.println("Solidity Parser:  Usage is one of:");
+      System.out.println("         java Solidity < inputfile");
+      System.out.println("OR");
+      System.out.println("         java Solidity inputfile");
+      return ;
+    }
+
+
+
+        try {
+            //parser.Start();
+            //System.out.println("Syntax is okay");
+            ASTStart root = parser.Start();
+            SolidityVisitor v = new SolidityMirrorVisitor();
+            root.jjtAccept(v, null);
+            System.out.println("");
+            System.out.println("Process Finished!");
+        } catch (Throwable e) {
+            // Catching Throwable is ugly but JavaCC throws Error objects!
+            System.out.println("Syntax check failed: " + e.getMessage());
+        }
+    }
+}
+
+PARSER_END(Solidity)
+
+SKIP:  { " " | "\t" | "\n"
+ | "\r"
+ |	<SLASH_SLASH_COMMENT: "//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
+ |	<NUMERAL_COMMENT: "#" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
+ |	<SLASH_STAR_COMMENT: "/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">
+}
+
+TOKEN: {
+  "("
+| ")"
+| "+"
+| "*"
+| <CONTRACT: "contract">
+| <FUNCTION: "function">
+| <RETURNS: "returns">
+| <PUBLIC: "public">
+| <PAYABLE: "payable">
+| <PURE: "pure">
+| <IDENTIFIER: <LETTER> (<LETTER> | <DIGIT>)*>
+| <LABEL: "@"<LETTER> (<LETTER> | <DIGIT> | ".")*>
+| <#LETTER: ["A"-"Z","_","a"-"z"]>
+| <#DIGIT: ["0"-"9"]>
+| <NUMBER: <DIGITS> "." <DIGITS> | <DIGITS> >
+| <#DIGITS: (<DIGIT>)+>
+| <STRING: ("\"" (~["\""])* "\"") | ("\'" (~["\'"])* "\'") >
+}
+
+void Identifier() #Identifier : {Token t;}
+{
+  t=<IDENTIFIER> {jjtThis.value = t.image;}
+}
+
+void String() #String : {Token t;}
+{
+  t=<STRING> {jjtThis.value = t.image;}
+}
+
+void Number() #Number : {Token t;}
+{
+  t=<NUMBER> {jjtThis.value = t.image;}
+}
+
+
+ASTStart Start() #Start: {}
+{
+ (Statement())* <EOF>  {return jjtThis;}
+}
+
+void Statement() #Statement : {}
+{
+    LOOKAHEAD(3) Assignment() ";"
+}
+
+void PrimaryExpression() #PrimaryExpression : {}
+{
+	  "(" Expression() ")" {jjtThis.setParenthesis(true);}
+  | "-" Expression()     {jjtThis.setMinus(true);}
+//  | LOOKAHEAD(3) FunctionCall()
+//  | LOOKAHEAD(3) Array()
+  | Identifier()
+  | Number()
+}
