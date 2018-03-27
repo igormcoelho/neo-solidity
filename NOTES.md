@@ -1,0 +1,1 @@
+- pure functions can be ignored (or forbid somehow to access storage in NEO). Example: function Test() pure public { /* cannot access storage or transaction info. good for auxiliary functions */ } 
