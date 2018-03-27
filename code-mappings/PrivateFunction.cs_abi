@@ -1,10 +1,10 @@
 {
-    "hash":"0x325c5fbcc8bd10ca38b2673379e2f1d06f69781e",
+    "hash":"0xd31ca4ff56eca028c88d705883f4a641b559f46e",
     "entrypoint":"Main",
     "functions":
     [
         {
-            "name":"NeoSolPublicFunction",
+            "name":"NeoSolPrivateFunction",
             "parameters":
             [
             ],
@@ -24,13 +24,6 @@
                 }
             ],
             "returntype":"Any"
-        },
-        {
-            "name":"Test",
-            "parameters":
-            [
-            ],
-            "returntype":"Void"
         }
     ],
     "events":

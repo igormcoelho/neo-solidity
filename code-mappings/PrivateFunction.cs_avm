@@ -1,8 +1,8 @@
 52c56b6c766b00527ac46c766b51527ac46168164e656f2e52756e74696d
-652e476574547269676765726306006250006168164e656f2e52756e7469
-6d652e4765745472696767657260907c907c9e632e006c766b00c3015f87
-640c006165240051616c75666c766b00c3045465737487640c0061651800
-51616c756600616c756600c56b61650700616c756600c56b616c7566
+652e476574547269676765726306006239006168164e656f2e52756e7469
+6d652e4765745472696767657260907c907c9e6317006c766b00c3015f87
+640c0061650d0051616c756600616c756600c56b61650700616c756600c5
+6b616c7566
 
 52	PUSH2	# The number 2 is pushed onto the stack.
 c5	NEWARRAY	#
@@ -25,7 +25,7 @@ c4	SETITEM	#
 68	SYSCALL	# Neo.Runtime.GetTrigger
 63	JMPIF	# 06
 00	PUSH0	#An empty array of bytes is pushed onto the stack
-62	JMP	# 50
+62	JMP	# 39
 00	PUSH0	#An empty array of bytes is pushed onto the stack
 61	NOP	# Does nothing.
 68	SYSCALL	# Neo.Runtime.GetTrigger
@@ -35,7 +35,7 @@ c4	SETITEM	#
 90	ABS	# The input is made positive.
 7c	SWAP	# The top two items on the stack are swapped.
 9e	NUMNOTEQUAL	# Returns 1 if the numbers are not equal, 0 otherwise.
-63	JMPIF	# 2e
+63	JMPIF	# 17
 00	PUSH0	#An empty array of bytes is pushed onto the stack
 6c	FROMALTSTACK	# Puts the input onto the top of the main stack. Removes it from the alt stack.
 76	DUP	# Duplicates the top stack item.
@@ -48,11 +48,7 @@ c3	PICKITEM	#
 00	PUSH0	#An empty array of bytes is pushed onto the stack
 61	NOP	# Does nothing.
 65	CALL	#
-24	PUSHBYTES36	 # 0051616c75666c766b00c3045465737487640c006165180051616c756600616c756600c5
-6b	TOALTSTACK	# Puts the input onto the top of the alt stack. Removes it from the main stack.
-61	NOP	# Does nothing.
-65	CALL	#
-07	PUSHBYTES7	 # 00616c756600c5
+0d	PUSHBYTES13	 # 0051616c756600616c756600c5
 6b	TOALTSTACK	# Puts the input onto the top of the alt stack. Removes it from the main stack.
 61	NOP	# Does nothing.
 6c	FROMALTSTACK	# Puts the input onto the top of the main stack. Removes it from the alt stack.

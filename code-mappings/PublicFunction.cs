@@ -22,6 +22,12 @@ namespace Neo.SmartContract
                     NeoSolPublicFunction();
                     return true;
                 }
+
+                if (operation == "Test")
+                {
+                    Test();
+                    return true;
+                }
             }
             return false;
         }
