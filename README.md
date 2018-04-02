@@ -18,7 +18,7 @@ This project will be organized in stages:
 
 1) One compiler (or many) will be written to provide translations of NeoSol to C#, Python and Java
 
-1) Support for NeoSol will be added to neocompiler.io project
+1) Support for NeoSol will be added to neocompiler-eco project
 
 1) Direct AVM code generation from NeoSol will be pursued in a next step
 
