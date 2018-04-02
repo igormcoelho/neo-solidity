@@ -10,6 +10,8 @@ So, the objective of this project is to provide a variant of Solidity for NEO, w
 Both architectures (Ethereum/NEO) define a virtual machine with exclusive opcodes, that have many things in common.
 However, there are differences that may limit the complete port of Solidity for NEO (and the reverse is also true, porting general purpose languages for Ethereum), so the idea is to keep the most of the original Solidity language, and use annotations to help the compiling process when a direct translation is not fully possible.
 
+Collaborations are open at master branch of the project.
+
 This project will be organized in stages:
 
 1) Initially, many code mappings will be provided from Solidity to C#, Python and Java (currently most used languages for NEO)
