@@ -1,0 +1,4 @@
+This project intends to give Solidity support for Neo platform.
+
+Team: Igor and Vitor Coelho
+December 2017
